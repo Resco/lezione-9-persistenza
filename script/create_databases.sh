@@ -40,7 +40,7 @@ cat $src/???_*.sql $src/seed.sql | psql $dbname
 
 # grant all privileges on all tables to our user
 for table in $(psql -tAc "select relname from pg_stat_user_tables" $dbname); do
-  psql -tAc "GRANT ALL PRIVILEGES ON TABLE products TO $dbuser " $dbname
+  psql -tAc "GRANT ALL PRIVILEGES ON TABLE $table TO $dbuser " $dbname
 done
 
 echo "OK"
