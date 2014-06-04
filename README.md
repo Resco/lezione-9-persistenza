@@ -26,7 +26,7 @@ The database schema is defined in the file `src/main/sql/000_create_products.sql
 
 We want to make it possible to persist the state of the checkout on the database.  Even if the JVM process is shut down, we should retain the total.  For this reason we get rid of the static checkout variable in the servlet.  We will use the "repository" pattern, so that the repository will give us a new instance of the SupermarketCheckout at every request, initialized with the state that was saved in the database.
 
-  1. Create a new table to store the total of our checkouts.  In preparation for the moment when we will support more checkouts at the same time, you will define two columns: an "id" integer column, and a "total" integer column.  You will need to add a new file `src/main/sql/001_create_checkouts.sql`.  You will also need to update the seed.sql to add a row to this new table.  Make it so that there is a checkout with id == 0.  Remember to run `script/create_databases.sh` again!
+  1. Create a new table to store the total of our checkouts.  In preparation for the moment when we will support more checkouts at the same time, you will define two columns: an "id" integer column, and a "total" integer column.  You will need to add a new file `src/main/sql/002_create_checkouts.sql`.  You will also need to update the seed.sql to add a row to this new table.  Make it so that there is a checkout with id == 0.  Remember to run `script/create_databases.sh` again!
 
   2. Change the SupermarketCheckoutRepository class so that the metdhods findById and save do the right thing.
 
