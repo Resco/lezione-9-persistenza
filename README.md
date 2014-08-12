@@ -43,4 +43,7 @@ We want to make it possible to persist the state of the checkout on the database
 
   Update the "total" and "reset" buttons on the UI so that they all work on the correct checkout, using the parameter checkout_id on the query string.
 
+## What I did
 
+Ho finito l'esercizio., modificando il CONTROLLER e l'INDEX. Ho aggiunto il metodo SAVE
+Ho imparato ad avviare gli script tramite eg  ./run.sh 
