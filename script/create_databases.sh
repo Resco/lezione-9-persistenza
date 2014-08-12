@@ -44,3 +44,8 @@ for table in $(psql -tAc "select relname from pg_stat_user_tables" $dbname); do
 done
 
 echo "OK"
+
+#start the application
+mvn clean package
+java -cp target/classes:"target/dependency/*" it.xpug.supermarket.main.Main
+

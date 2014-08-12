@@ -26,6 +26,22 @@ public class Database {
 			close(connection);
 		}
 	}
+	
+	public void executeNoPar(String sql) {
+		PreparedStatement statement = null;
+		Connection connection = null;
+		try {
+			connection = configuration.getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.execute();
+			connection.commit();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			close(statement);
+			close(connection);
+		}
+	}
 
 	public ListOfRows select(String sql, Object... params) {
 		PreparedStatement statement = null;

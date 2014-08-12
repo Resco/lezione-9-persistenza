@@ -7,13 +7,41 @@
     <h1>This is the Supermarket Checkout</h1>
 
     <p id='display'>&nbsp;</p>
+    
     <form id='scan'>
       <input type='submit' value='scan'/>
       <input type="text" name="code" value="" id="code"/>
     </form>
 
+	 <form id='total'>
+      <input type='submit' value='total'/>
+      <input type="text" name="checkout_id" value="" id="checkout_id"/>
+    </form>
+	
     <script src='/scripts/lib/jquery-1.10.2.min.js'></script>
     <script>
+    
+    function on_total_success(data) {
+        $("#display").text("Total: " + data.total);
+      }
+
+      function on_total_error(data) {
+        $("#display").text(data.responseJSON.description || "Total Not Found");
+      }
+
+      function on_total() {
+        $.ajax({
+          url: '/total',
+          method: 'post',
+          success: on_total_success,
+          error: on_total_error,
+          data: {
+            checkout_id: $("#checkout_id").val()
+          },
+        });
+        return false;
+      }
+      
       function on_scan_success(data) {
         $("#display").text("Price: " + data.price);
       }
@@ -29,7 +57,8 @@
           success: on_scan_success,
           error: on_scan_error,
           data: {
-            code: $("#code").val()
+            code: $("#code").val(),
+            checkout_id: $("#checkout_id").val()
           },
         });
         return false;
@@ -37,6 +66,7 @@
 
       $(document).ready(function() {
         $("#scan").submit(on_scan);
+        $("#total").submit(on_total);
       });
     </script>
   </body>

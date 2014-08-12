@@ -2,11 +2,13 @@ package it.xpug.supermarket.main;
 
 public class SupermarketCheckout {
 
+	private int id;
 	private int total;
 	private PriceList priceList;
 
-	public SupermarketCheckout(PriceList priceList) {
+	public SupermarketCheckout(int id, PriceList priceList) {
 		this.priceList = priceList;
+		this.id = id;
 	}
 
 	public int scan(String code) {
@@ -21,6 +23,10 @@ public class SupermarketCheckout {
 
 	public void setTotal(int newTotal) {
 		this.total = newTotal;
+	}
+	
+	public int getId(){
+		return this.id;
 	}
 
 }

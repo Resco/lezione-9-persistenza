@@ -32,7 +32,10 @@ public class SupermarketController {
 
 	private void doScan() throws IOException {
 		try {
-			SupermarketCheckout checkout = repository.findById(0);
+			int id = Integer.parseInt(request.getParameter("checkout_id"));
+			//prende il checkout in posizione check_id con il suo totale
+			SupermarketCheckout checkout = repository.findById(id);
+			//prende il prezzo del codice scelto
 			int price = checkout.scan(request.getParameter("code"));
 			repository.save(checkout);
 			writeBody(format("{ \"price\": %s }", price));
@@ -43,7 +46,8 @@ public class SupermarketController {
 	}
 
 	private void doTotal() throws IOException {
-		SupermarketCheckout checkout = repository.findById(0);
+		int check_id_int=Integer.parseInt(request.getParameter("checkout_id"));
+		SupermarketCheckout checkout = repository.findById(check_id_int);
 		int total = checkout.total();
 		writeBody(toJson("total", total));
 	}
